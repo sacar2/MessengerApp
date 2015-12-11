@@ -50,11 +50,13 @@ OBJECTS_DIR   = ./
 
 SOURCES       = ../finalOSLab/main.cpp \
 		../finalOSLab/mainwindow.cpp \
-		../finalOSLab/chatroom.cpp moc_mainwindow.cpp \
+		../finalOSLab/chatroom.cpp qrc_pics.cpp \
+		moc_mainwindow.cpp \
 		moc_chatroom.cpp
 OBJECTS       = main.o \
 		mainwindow.o \
 		chatroom.o \
+		qrc_pics.o \
 		moc_mainwindow.o \
 		moc_chatroom.o
 DIST          = /Applications/Qt/5.5/clang_64/mkspecs/features/spec_pre.prf \
@@ -387,6 +389,7 @@ Makefile: ../finalOSLab/finalOSLab.pro /Applications/Qt/5.5/clang_64/mkspecs/mac
 		/Applications/Qt/5.5/clang_64/mkspecs/features/yacc.prf \
 		/Applications/Qt/5.5/clang_64/mkspecs/features/lex.prf \
 		../finalOSLab/finalOSLab.pro \
+		../finalOSLab/pics.qrc \
 		/Applications/Qt/5.5/clang_64/lib/QtWidgets.framework/QtWidgets.prl \
 		/Applications/Qt/5.5/clang_64/lib/QtGui.framework/QtGui.prl \
 		/Applications/Qt/5.5/clang_64/lib/QtCore.framework/QtCore.prl
@@ -534,6 +537,7 @@ Makefile: ../finalOSLab/finalOSLab.pro /Applications/Qt/5.5/clang_64/mkspecs/mac
 /Applications/Qt/5.5/clang_64/mkspecs/features/yacc.prf:
 /Applications/Qt/5.5/clang_64/mkspecs/features/lex.prf:
 ../finalOSLab/finalOSLab.pro:
+../finalOSLab/pics.qrc:
 /Applications/Qt/5.5/clang_64/lib/QtWidgets.framework/QtWidgets.prl:
 /Applications/Qt/5.5/clang_64/lib/QtGui.framework/QtGui.prl:
 /Applications/Qt/5.5/clang_64/lib/QtCore.framework/QtCore.prl:
@@ -566,6 +570,7 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
+	$(COPY_FILE) --parents ../finalOSLab/pics.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents ../finalOSLab/mainwindow.h ../finalOSLab/chatroom.h $(DISTDIR)/
 	$(COPY_FILE) --parents ../finalOSLab/main.cpp ../finalOSLab/mainwindow.cpp ../finalOSLab/chatroom.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../finalOSLab/mainwindow.ui ../finalOSLab/chatroom.ui $(DISTDIR)/
@@ -592,8 +597,15 @@ check: first
 
 compiler_objective_c_make_all:
 compiler_objective_c_clean:
-compiler_rcc_make_all:
+compiler_rcc_make_all: qrc_pics.cpp
 compiler_rcc_clean:
+	-$(DEL_FILE) qrc_pics.cpp
+qrc_pics.cpp: ../finalOSLab/pics.qrc \
+		../finalOSLab/send.png \
+		../finalOSLab/emojibutton.png \
+		../finalOSLab/66fa29917e01191eb599de4a6cac8c8f.jpg
+	/Applications/Qt/5.5/clang_64/bin/rcc -name pics ../finalOSLab/pics.qrc -o qrc_pics.cpp
+
 compiler_moc_header_make_all: moc_mainwindow.cpp moc_chatroom.cpp
 compiler_moc_header_clean:
 	-$(DEL_FILE) moc_mainwindow.cpp moc_chatroom.cpp
@@ -601,6 +613,8 @@ moc_mainwindow.cpp: /Applications/Qt/5.5/clang_64/lib/QtWidgets.framework/Header
 		/Applications/Qt/5.5/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
 		/Applications/Qt/5.5/clang_64/lib/QtWidgets.framework/Headers/QDialog \
 		/Applications/Qt/5.5/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
+		/Applications/Qt/5.5/clang_64/lib/QtCore.framework/Headers/QVector \
+		/Applications/Qt/5.5/clang_64/lib/QtCore.framework/Headers/qvector.h \
 		/Applications/Qt/5.5/clang_64/lib/QtCore.framework/Headers/QStringList \
 		/Applications/Qt/5.5/clang_64/lib/QtCore.framework/Headers/qstringlist.h \
 		/Applications/Qt/5.5/clang_64/lib/QtCore.framework/Headers/QStringListModel \
@@ -637,7 +651,7 @@ compiler_yacc_impl_make_all:
 compiler_yacc_impl_clean:
 compiler_lex_make_all:
 compiler_lex_clean:
-compiler_clean: compiler_moc_header_clean compiler_uic_clean 
+compiler_clean: compiler_rcc_clean compiler_moc_header_clean compiler_uic_clean 
 
 ####### Compile
 
@@ -646,6 +660,8 @@ main.o: ../finalOSLab/main.cpp ../finalOSLab/mainwindow.h \
 		/Applications/Qt/5.5/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
 		/Applications/Qt/5.5/clang_64/lib/QtWidgets.framework/Headers/QDialog \
 		/Applications/Qt/5.5/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
+		/Applications/Qt/5.5/clang_64/lib/QtCore.framework/Headers/QVector \
+		/Applications/Qt/5.5/clang_64/lib/QtCore.framework/Headers/qvector.h \
 		/Applications/Qt/5.5/clang_64/lib/QtCore.framework/Headers/QStringList \
 		/Applications/Qt/5.5/clang_64/lib/QtCore.framework/Headers/qstringlist.h \
 		/Applications/Qt/5.5/clang_64/lib/QtCore.framework/Headers/QStringListModel \
@@ -664,6 +680,8 @@ mainwindow.o: ../finalOSLab/mainwindow.cpp ../finalOSLab/mainwindow.h \
 		/Applications/Qt/5.5/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
 		/Applications/Qt/5.5/clang_64/lib/QtWidgets.framework/Headers/QDialog \
 		/Applications/Qt/5.5/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
+		/Applications/Qt/5.5/clang_64/lib/QtCore.framework/Headers/QVector \
+		/Applications/Qt/5.5/clang_64/lib/QtCore.framework/Headers/qvector.h \
 		/Applications/Qt/5.5/clang_64/lib/QtCore.framework/Headers/QStringList \
 		/Applications/Qt/5.5/clang_64/lib/QtCore.framework/Headers/qstringlist.h \
 		/Applications/Qt/5.5/clang_64/lib/QtCore.framework/Headers/QStringListModel \
@@ -681,6 +699,9 @@ chatroom.o: ../finalOSLab/chatroom.cpp ../finalOSLab/chatroom.h \
 		/Applications/Qt/5.5/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
 		ui_chatroom.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o chatroom.o ../finalOSLab/chatroom.cpp
+
+qrc_pics.o: qrc_pics.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_pics.o qrc_pics.cpp
 
 moc_mainwindow.o: moc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainwindow.o moc_mainwindow.cpp

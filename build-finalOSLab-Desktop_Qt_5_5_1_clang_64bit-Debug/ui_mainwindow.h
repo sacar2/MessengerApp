@@ -31,7 +31,7 @@ public:
     QWidget *centralWidget;
     QLabel *label;
     QPushButton *addChatButton;
-    QListView *userListView;
+    QListView *chatListView;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -53,10 +53,10 @@ public:
         addChatButton = new QPushButton(centralWidget);
         addChatButton->setObjectName(QStringLiteral("addChatButton"));
         addChatButton->setGeometry(QRect(270, 0, 31, 31));
-        userListView = new QListView(centralWidget);
-        userListView->setObjectName(QStringLiteral("userListView"));
-        userListView->setGeometry(QRect(0, 30, 300, 351));
-        userListView->setMinimumSize(QSize(300, 0));
+        chatListView = new QListView(centralWidget);
+        chatListView->setObjectName(QStringLiteral("chatListView"));
+        chatListView->setGeometry(QRect(0, 30, 300, 351));
+        chatListView->setMinimumSize(QSize(300, 0));
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));

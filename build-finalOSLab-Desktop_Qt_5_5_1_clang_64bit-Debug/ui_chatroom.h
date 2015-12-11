@@ -48,13 +48,30 @@ public:
         chatView->setGeometry(QRect(10, 0, 381, 221));
         gifButton = new QToolButton(chatRoom);
         gifButton->setObjectName(QStringLiteral("gifButton"));
-        gifButton->setGeometry(QRect(200, 220, 61, 41));
+        gifButton->setGeometry(QRect(10, 220, 61, 41));
+        QIcon icon;
+        icon.addFile(QStringLiteral(":/new/prefix1/emojibutton.png"), QSize(), QIcon::Normal, QIcon::Off);
+        gifButton->setIcon(icon);
+        gifButton->setIconSize(QSize(21, 21));
         emojiButton = new QToolButton(chatRoom);
         emojiButton->setObjectName(QStringLiteral("emojiButton"));
-        emojiButton->setGeometry(QRect(270, 220, 61, 41));
+        emojiButton->setGeometry(QRect(90, 220, 61, 41));
+        QFont font;
+        font.setFamily(QStringLiteral("Futura"));
+        font.setPointSize(14);
+        emojiButton->setFont(font);
         toolButton_3 = new QToolButton(chatRoom);
         toolButton_3->setObjectName(QStringLiteral("toolButton_3"));
-        toolButton_3->setGeometry(QRect(340, 220, 51, 41));
+        toolButton_3->setGeometry(QRect(330, 220, 60, 41));
+        QIcon icon1;
+        icon1.addFile(QStringLiteral(":/new/prefix1/send.png"), QSize(), QIcon::Normal, QIcon::Off);
+        toolButton_3->setIcon(icon1);
+        toolButton_3->setIconSize(QSize(26, 26));
+        gifButton->raise();
+        emojiButton->raise();
+        toolButton_3->raise();
+        textEdit->raise();
+        chatView->raise();
 
         retranslateUi(chatRoom);
 
@@ -64,7 +81,10 @@ public:
     void retranslateUi(QDialog *chatRoom)
     {
         chatRoom->setWindowTitle(QApplication::translate("chatRoom", "Dialog", 0));
-        gifButton->setText(QApplication::translate("chatRoom", "...", 0));
+#ifndef QT_NO_TOOLTIP
+        gifButton->setToolTip(QApplication::translate("chatRoom", "<html><head/><body><p><img src=\":/new/prefix1/emojibutton.png\"/></p></body></html>", 0));
+#endif // QT_NO_TOOLTIP
+        gifButton->setText(QString());
         emojiButton->setText(QApplication::translate("chatRoom", "gif", 0));
         toolButton_3->setText(QApplication::translate("chatRoom", "...", 0));
     } // retranslateUi
