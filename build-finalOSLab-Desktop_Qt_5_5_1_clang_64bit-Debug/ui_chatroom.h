@@ -28,7 +28,7 @@ public:
     QListView *chatView;
     QToolButton *gifButton;
     QToolButton *emojiButton;
-    QToolButton *toolButton_3;
+    QToolButton *sendButton;
 
     void setupUi(QDialog *chatRoom)
     {
@@ -60,16 +60,16 @@ public:
         font.setFamily(QStringLiteral("Futura"));
         font.setPointSize(14);
         emojiButton->setFont(font);
-        toolButton_3 = new QToolButton(chatRoom);
-        toolButton_3->setObjectName(QStringLiteral("toolButton_3"));
-        toolButton_3->setGeometry(QRect(330, 220, 60, 41));
+        sendButton = new QToolButton(chatRoom);
+        sendButton->setObjectName(QStringLiteral("sendButton"));
+        sendButton->setGeometry(QRect(330, 220, 60, 41));
         QIcon icon1;
         icon1.addFile(QStringLiteral(":/new/prefix1/send.png"), QSize(), QIcon::Normal, QIcon::Off);
-        toolButton_3->setIcon(icon1);
-        toolButton_3->setIconSize(QSize(26, 26));
+        sendButton->setIcon(icon1);
+        sendButton->setIconSize(QSize(26, 26));
         gifButton->raise();
         emojiButton->raise();
-        toolButton_3->raise();
+        sendButton->raise();
         textEdit->raise();
         chatView->raise();
 
@@ -86,7 +86,7 @@ public:
 #endif // QT_NO_TOOLTIP
         gifButton->setText(QString());
         emojiButton->setText(QApplication::translate("chatRoom", "gif", 0));
-        toolButton_3->setText(QApplication::translate("chatRoom", "...", 0));
+        sendButton->setText(QApplication::translate("chatRoom", "...", 0));
     } // retranslateUi
 
 };
